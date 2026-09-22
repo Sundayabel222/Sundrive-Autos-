@@ -14,22 +14,22 @@ export const site = {
   description:
     "Sundrive Autos is a premium automotive dealership specialising in high-end vehicles and imports. Browse our curated inventory, book an inspection, or request a vehicle we don't stock yet.",
   url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
-  established: 2016,
+  established: 2025,
 } as const;
 
 export const contact = {
-  phoneDisplay: "+234 800 000 0000",
-  phone: "+2348000000000",
-  whatsapp: "2348000000000",
-  email: "hello@sundriveautos.com",
-  salesEmail: "sales@sundriveautos.com",
-  addressLines: ["12 Auto Plaza, Victoria Island", "Lagos, Nigeria"],
+  phoneDisplay: "09024077324",
+  phone: "09024077324",
+  whatsapp: "2349024077324",
+  email: "sundriveauto@gmail.com",
+  salesEmail: "sundriveauto@gmail.com",
+  addressLines: ["Online showroom", "Serving clients nationwide"],
   /** Plain text address used for the map query + schema.org. */
-  address: "12 Auto Plaza, Victoria Island, Lagos, Nigeria",
+  address: "Nigeria",
   hours: [
-    { days: "Monday – Friday", time: "8:00 AM – 6:00 PM" },
-    { days: "Saturday", time: "9:00 AM – 4:00 PM" },
-    { days: "Sunday", time: "Closed" },
+    { days: "Open 24/7", time: "Always available online" },
+    { days: "WhatsApp", time: "Ready to assist anytime" },
+    { days: "Delivery", time: "Nationwide support" },
   ],
 } as const;
 
@@ -84,10 +84,12 @@ export const achievements = [
 ] as const;
 
 export const socials = [
-  { label: "Instagram", href: "https://instagram.com/sundriveautos", icon: "instagram" },
-  { label: "Facebook", href: "https://facebook.com/sundriveautos", icon: "facebook" },
-  { label: "X (Twitter)", href: "https://x.com/sundriveautos", icon: "x" },
-  { label: "TikTok", href: "https://tiktok.com/@sundriveautos", icon: "tiktok" },
+  {
+    label: "Instagram",
+    href: "https://www.instagram.com/sundriveauto?stkn=MW9jbzhrb3NuY3FnYw==",
+    icon: "instagram",
+  },
+  { label: "TikTok", href: "https://www.tiktok.com/@sundriveauto?_r=1&_t=ZS-99wmLsKIOQv", icon: "tiktok" },
 ] as const;
 
 /** Prefilled WhatsApp deep link, optionally about a specific vehicle. */

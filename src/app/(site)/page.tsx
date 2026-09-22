@@ -39,12 +39,12 @@ export default async function HomePage() {
     ]);
 
   const spotlight = spotlightPage.items[0] ?? featured[0] ?? null;
-  const yearsTrading = new Date().getFullYear() - site.established;
+  const yearsTrading = Math.max(1, new Date().getFullYear() - site.established);
 
   const stats = [
     { value: `${formatNumber(inventoryCount)}+`, label: "Cars in stock" },
     { value: `${brandCount.length}`, label: "Premium brands" },
-    { value: `${yearsTrading}`, label: "Years trading" },
+    { value: `${yearsTrading}+`, label: "Years trading" },
     { value: `${formatNumber(businessClaims.vehiclesDelivered)}+`, label: "Cars delivered" },
   ];
 

@@ -45,7 +45,8 @@ export function primaryImage(v: Pick<Vehicle, "images">) {
  * TODO(owner): replace `public/placeholder-car.svg` with branded artwork, or
  * upload real photos per vehicle in the admin dashboard.
  */
-export const PLACEHOLDER_IMAGE = "/placeholder-car.svg";
+export const PLACEHOLDER_IMAGE =
+  "https://images.unsplash.com/photo-1552519507-da3b142c6e3d?auto=format&fit=crop&w=1200&q=80";
 
 export function isSoldStatus(status: string) {
   return status === "SOLD";

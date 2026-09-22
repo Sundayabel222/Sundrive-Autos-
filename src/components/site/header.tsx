@@ -57,13 +57,6 @@ export function SiteHeader() {
         </nav>
 
         <div className="hidden items-center gap-3 lg:flex">
-          <a
-            href={`tel:${contact.phone}`}
-            className="flex items-center gap-2 text-sm font-semibold text-ink-700 transition-colors hover:text-brand-600"
-          >
-            <Icon name="phone" className="h-4 w-4 text-brand-500" />
-            {contact.phoneDisplay}
-          </a>
           <Link
             href="/inspection"
             className="rounded-full bg-brand-500 px-5 py-2.5 text-sm font-semibold text-white shadow-[0_10px_24px_-10px_rgba(0,153,255,0.8)] transition-all hover:bg-brand-600 hover:shadow-[0_14px_28px_-10px_rgba(0,153,255,0.9)]"

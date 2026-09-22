@@ -91,12 +91,7 @@ export function SiteFooter() {
               </a>
             </li>
             <li>
-              <a
-                href={mapDirectionsUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="flex items-start gap-3 text-sm text-white/60 transition-colors hover:text-white"
-              >
+              <div className="flex items-start gap-3 text-sm text-white/60">
                 <Icon name="mapPin" className="mt-0.5 h-4 w-4 shrink-0 text-brand-400" />
                 <span>
                   {contact.addressLines.map((line) => (
@@ -105,7 +100,7 @@ export function SiteFooter() {
                     </span>
                   ))}
                 </span>
-              </a>
+              </div>
             </li>
           </FooterColumn>
         </div>

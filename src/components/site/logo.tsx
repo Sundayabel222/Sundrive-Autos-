@@ -6,11 +6,10 @@ import { cn } from "@/lib/cn";
 /**
  * Brand mark + wordmark.
  *
- * TODO(owner): drop the real logo at `public/logo.svg` and set `LOGO_URL` below
- * to `/logo.svg` — the component switches to the image automatically. Until
- * then an inline SVG stand-in is used so nothing looks broken.
+ * Use the supplied Sundrive Autos logo artwork in /public/logo.svg so the site
+ * matches the company identity exactly.
  */
-const LOGO_URL: string | null = null;
+const LOGO_URL: string | null = "/logo.svg";
 
 const sizeStyles = {
   sm: { mark: "h-7 w-7", text: "text-base", gap: "gap-2" },

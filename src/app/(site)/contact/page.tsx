@@ -36,10 +36,10 @@ export default async function ContactPage(props: PageProps<"/contact">) {
   }> = [
     {
       icon: "phone",
-      label: "Call the showroom",
+      label: "Call us",
       value: contact.phoneDisplay,
       href: `tel:${contact.phone}`,
-      hint: "Fastest answer during opening hours",
+      hint: "Available any time for fast answers",
     },
     {
       icon: "whatsapp",
@@ -59,11 +59,11 @@ export default async function ContactPage(props: PageProps<"/contact">) {
     },
     {
       icon: "mapPin",
-      label: "Visit us",
+      label: "Nationwide support",
       value: contact.addressLines.join(", "),
-      href: mapDirectionsUrl,
+      href: whatsappLink("Hi Sundrive Autos, I need support for a vehicle purchase."),
       external: true,
-      hint: "Open six days a week",
+      hint: "No physical showroom right now",
     },
   ];
 
