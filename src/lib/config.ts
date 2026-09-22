@@ -6,6 +6,8 @@
  * details (and drop the real logo at /public/logo.svg, photos in /public/uploads).
  */
 
+const rawSiteUrl = process.env.NEXT_PUBLIC_SITE_URL?.trim();
+
 export const site = {
   name: "Sundrive Autos",
   /** Short mark used in the header/footer logo lockup. */
@@ -13,7 +15,7 @@ export const site = {
   tagline: "Your Trusted Destination For Premium Cars",
   description:
     "Sundrive Autos is a premium automotive dealership specialising in high-end vehicles and imports. Browse our curated inventory, book an inspection, or request a vehicle we don't stock yet.",
-  url: process.env.NEXT_PUBLIC_SITE_URL ?? "http://localhost:3000",
+  url: rawSiteUrl || "https://sundriveautos.com",
   established: 2025,
 } as const;
 
