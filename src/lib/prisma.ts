@@ -2,9 +2,10 @@ import { PrismaBetterSqlite3 } from "@prisma/adapter-better-sqlite3";
 import { PrismaClient } from "@/generated/prisma/client";
 
 /**
- * Prisma 7 requires a driver adapter. Swapping SQLite for Postgres later means
- * changing this one line to `new PrismaPg({ connectionString })` and updating
- * the `provider` in prisma/schema.prisma.
+ * Prisma 7 requires a driver adapter. This app is configured for SQLite by
+ * default so it builds reliably in local and serverless environments. If you
+ * want a production database on Vercel, replace the adapter and provider to a
+ * Postgres-compatible setup and set DATABASE_URL to a real Postgres URL.
  */
 function createPrismaClient() {
   const adapter = new PrismaBetterSqlite3({
