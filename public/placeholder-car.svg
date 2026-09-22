@@ -1,0 +1,33 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Vehicle photo coming soon">
+  <defs>
+    <linearGradient id="bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#f5f7fa"/>
+      <stop offset="1" stop-color="#e4e7eb"/>
+    </linearGradient>
+    <linearGradient id="accent" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#0099ff"/>
+      <stop offset="1" stop-color="#0077cc"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="800" height="500" fill="url(#bg)"/>
+  <circle cx="400" cy="228" r="150" fill="#0099ff" opacity="0.06"/>
+
+  <!-- Car silhouette -->
+  <g fill="none" stroke="#9aa0a8" stroke-width="7" stroke-linecap="round" stroke-linejoin="round" opacity="0.85">
+    <path d="M168 300h464M196 300v-42l34-70h180l52 70h134l32 42v0"/>
+    <path d="M230 300v-42h180"/>
+    <path d="M262 188h122l40 58H262z"/>
+    <circle cx="268" cy="308" r="34"/>
+    <circle cx="560" cy="308" r="34"/>
+    <path d="M196 258h-28v42M628 258h28v42"/>
+  </g>
+
+  <!-- Placeholder notice -->
+  <g>
+    <rect x="272" y="392" width="256" height="44" rx="22" fill="url(#accent)"/>
+    <text x="400" y="420" font-family="system-ui, -apple-system, Segoe UI, sans-serif" font-size="17" font-weight="600" fill="#ffffff" text-anchor="middle" letter-spacing="0.5">
+      Photos coming soon
+    </text>
+  </g>
+</svg>

@@ -1,0 +1,205 @@
+@import "tailwindcss";
+
+/**
+ * Sundrive Autos design tokens.
+ *
+ * Brand: blue #0099FF (trust/technology), black (luxury), white (clean),
+ * #F5F7FA (light gray surface). Light-first: the automatic dark-mode inversion
+ * is intentionally disabled because it fights the brand palette — dark is used
+ * deliberately via `.surface-dark` sections instead.
+ */
+@theme {
+  /* Brand blue scale, anchored on the logo's #0099FF / #0077CC */
+  --color-brand-50: #eaf6ff;
+  --color-brand-100: #d6edff;
+  --color-brand-200: #add9ff;
+  --color-brand-300: #7ec4ff;
+  --color-brand-400: #3faeff;
+  --color-brand-500: #0099ff;
+  --color-brand-600: #0077cc;
+  --color-brand-700: #005fa3;
+  --color-brand-800: #004a80;
+  --color-brand-900: #00365c;
+
+  /* Neutral "ink" ramp for text and dark sections */
+  --color-ink-50: #f5f7fa;
+  --color-ink-100: #e4e7eb;
+  --color-ink-200: #c9cdd3;
+  --color-ink-300: #9aa0a8;
+  --color-ink-400: #6b7079;
+  --color-ink-500: #4a4e57;
+  --color-ink-600: #2c2f36;
+  --color-ink-700: #1f2126;
+  --color-ink-800: #141518;
+  --color-ink-900: #0a0a0b;
+  --color-ink-950: #000000;
+
+  /* Semantic */
+  --color-surface: #f5f7fa;
+  --color-ink: #0a0a0b;
+  --color-muted: #6b7079;
+
+  /* Typography (wired to next/font in layout.tsx) */
+  --font-sans: var(--font-body), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-display), ui-sans-serif, system-ui, sans-serif;
+
+  /* Motion */
+  --ease-premium: cubic-bezier(0.22, 1, 0.36, 1);
+
+  /* Elevation — soft, wide, low-opacity shadows read as "premium" */
+  --shadow-card: 0 1px 2px rgb(10 10 11 / 0.04), 0 8px 24px -12px rgb(10 10 11 / 0.12);
+  --shadow-lift: 0 4px 12px rgb(10 10 11 / 0.06), 0 24px 48px -20px rgb(10 10 11 / 0.22);
+  --shadow-brand: 0 12px 32px -12px rgb(0 153 255 / 0.5);
+}
+
+@layer base {
+  * {
+    border-color: var(--color-ink-100);
+  }
+
+  html {
+    /* Next 16 no longer forces instant scroll; opt in explicitly. */
+    scroll-behavior: smooth;
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: var(--color-ink);
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4 {
+    font-family: var(--font-display);
+    letter-spacing: -0.02em;
+    text-wrap: balance;
+  }
+
+  p {
+    text-wrap: pretty;
+  }
+
+  /* Consistent, brand-coloured focus ring for keyboard users. */
+  :focus-visible {
+    outline: 2px solid var(--color-brand-500);
+    outline-offset: 2px;
+    border-radius: 2px;
+  }
+
+  ::selection {
+    background-color: var(--color-brand-500);
+    color: #fff;
+  }
+}
+
+/* -------------------------------------------------------------------------- */
+/* Layout utilities                                                            */
+/* -------------------------------------------------------------------------- */
+
+@utility container-page {
+  width: 100%;
+  margin-inline: auto;
+  max-width: 80rem; /* 1280px */
+  padding-inline: 1.25rem;
+
+  @media (width >= 40rem) {
+    padding-inline: 2rem;
+  }
+  @media (width >= 64rem) {
+    padding-inline: 2.5rem;
+  }
+}
+
+/* Small uppercase label used above section headings. */
+@utility eyebrow {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--color-brand-600);
+}
+
+/* Hairline gradient divider that fades at both ends. */
+@utility rule-fade {
+  height: 1px;
+  background-image: linear-gradient(
+    to right,
+    transparent,
+    var(--color-ink-200),
+    transparent
+  );
+}
+
+@utility surface-dark {
+  background-color: var(--color-ink-900);
+  color: #fff;
+}
+
+/* Fine dotted texture for dark hero/banner panels. */
+@utility texture-grid {
+  background-image: radial-gradient(rgb(255 255 255 / 0.07) 1px, transparent 1px);
+  background-size: 22px 22px;
+}
+
+/* -------------------------------------------------------------------------- */
+/* Animations                                                                  */
+/* -------------------------------------------------------------------------- */
+
+@keyframes sd-fade-up {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+@keyframes sd-shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+@utility animate-fade-up {
+  animation: sd-fade-up 0.6s var(--ease-premium) both;
+}
+
+/* Skeleton shimmer while a server component streams in. */
+@utility shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+@utility shimmer-bar {
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    transparent,
+    rgb(255 255 255 / 0.6),
+    transparent
+  );
+  animation: sd-shimmer 1.6s infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

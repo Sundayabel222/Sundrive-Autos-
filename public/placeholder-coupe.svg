@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Coupe photo coming soon">
+  <defs>
+    <linearGradient id="c-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef1f6"/><stop offset="1" stop-color="#dfe3ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#c-bg)"/>
+  <ellipse cx="400" cy="336" rx="240" ry="26" fill="#0a0a0b" opacity="0.07"/>
+  <g fill="none" stroke="#8d93a1" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M146 330h510"/>
+    <path d="M178 330v-24l38-18 96-96h130l98 96h70l30 18v24"/>
+    <path d="M320 200h108l78 78H262z"/>
+    <circle cx="262" cy="330" r="36"/>
+    <circle cx="542" cy="330" r="36"/>
+  </g>
+  <rect x="272" y="400" width="256" height="42" rx="21" fill="#0077cc"/>
+  <text x="400" y="427" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#fff" text-anchor="middle" letter-spacing="0.6">COUPE · PHOTOS COMING SOON</text>
+</svg>

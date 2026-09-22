@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" role="img" aria-label="Sedan photo coming soon">
+  <defs>
+    <linearGradient id="s-bg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#eef3f8"/><stop offset="1" stop-color="#dde4ec"/>
+    </linearGradient>
+  </defs>
+  <rect width="800" height="500" fill="url(#s-bg)"/>
+  <ellipse cx="400" cy="330" rx="230" ry="26" fill="#0a0a0b" opacity="0.06"/>
+  <g fill="none" stroke="#8f98a3" stroke-width="7" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M150 322h500"/>
+    <path d="M182 322v-30l30-16 74-52h150l92 52h84l38 16v30"/>
+    <path d="M286 224h130l64 40H240v-14z"/>
+    <circle cx="268" cy="322" r="34"/>
+    <circle cx="536" cy="322" r="34"/>
+  </g>
+  <rect x="272" y="398" width="256" height="42" rx="21" fill="#0077cc"/>
+  <text x="400" y="425" font-family="system-ui, sans-serif" font-size="16" font-weight="600" fill="#fff" text-anchor="middle" letter-spacing="0.6">SEDAN · PHOTOS COMING SOON</text>
+</svg>

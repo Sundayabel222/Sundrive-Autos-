@@ -1,0 +1,189 @@
+// Sundrive Autos — data model
+//
+// SQLite notes:
+//  - Enums are NOT supported. Enum-like fields are Strings; the allowed values are
+//    documented inline and mirrored as TypeScript unions in src/lib/constants.ts.
+//  - Scalar lists are NOT supported. `features` / `images` are JSON-encoded strings,
+//    decoded through helpers in src/lib/vehicle.ts.
+
+generator client {
+  provider = "prisma-client"
+  output   = "../src/generated/prisma"
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+/// Staff account for the admin dashboard.
+model AdminUser {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("ADMIN") // ADMIN | SALES
+  lastLoginAt  DateTime?
+  createdAt    DateTime @default(now())
+}
+
+/// A vehicle listing. Doubles as the public showroom record and admin inventory record.
+model Vehicle {
+  id            String  @id @default(cuid())
+  slug          String  @unique
+  make          String
+  model         String
+  trim          String?
+  year          Int
+  price         Int // whole currency units, see CURRENCY in src/lib/constants.ts
+  mileage       Int
+  bodyType      String // SUV | Sedan | Coupe | Hatchback | Pickup | Crossover | Convertible | Wagon
+  fuelType      String // Petrol | Diesel | Hybrid | Electric
+  transmission  String // Automatic | Manual | CVT
+  driveType     String // FWD | RWD | AWD | 4WD
+  engine        String
+  exteriorColor String
+  interiorColor String?
+  condition     String  @default("Foreign Used") // Brand New | Foreign Used | Nigerian Used
+  location      String
+  vin           String?
+  description   String
+  features      String  @default("[]") // JSON array of strings
+  images        String  @default("[]") // JSON array of image paths/URLs
+  videoUrl      String?
+  status        String  @default("AVAILABLE") // AVAILABLE | RESERVED | SOLD
+  featured      Boolean @default(false)
+
+  views      Int           @default(0)
+  viewsLog   VehicleView[]
+  inspections Inspection[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([make])
+  @@index([price])
+  @@index([createdAt])
+}
+
+/// One row per detail-page view. Powers the "most viewed cars" analytics widget.
+model VehicleView {
+  id        String   @id @default(cuid())
+  vehicleId String
+  vehicle   Vehicle  @relation(fields: [vehicleId], references: [id], onDelete: Cascade)
+  createdAt DateTime @default(now())
+
+  @@index([vehicleId])
+  @@index([createdAt])
+}
+
+/// Inspection booking. `vehicleLabel` is free text so a customer can book for a
+/// vehicle we don't list; `vehicleId` links it to inventory when they came from a listing.
+model Inspection {
+  id            String    @id @default(cuid())
+  customerName  String
+  email         String
+  phone         String
+  vehicleId     String?
+  vehicle       Vehicle?  @relation(fields: [vehicleId], references: [id], onDelete: SetNull)
+  vehicleLabel  String
+  preferredDate DateTime
+  preferredTime String
+  message       String?
+  status        String    @default("PENDING") // PENDING | APPROVED | RESCHEDULED | COMPLETED | REJECTED
+  adminNotes    String?
+  leadSource    String    @default("website")
+  customerId    String?
+  customer      Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+  @@index([preferredDate])
+}
+
+/// Customer asking us to source a vehicle we don't currently stock.
+model SourcingRequest {
+  id             String    @id @default(cuid())
+  customerName   String
+  email          String
+  phone          String
+  make           String
+  model          String
+  yearFrom       Int?
+  yearTo         Int?
+  budget         Int
+  location       String
+  notes          String?
+  referenceImage String? // path under /public/uploads or a remote URL
+  status         String    @default("NEW") // NEW | IN_PROGRESS | SOURCED | CLOSED
+  adminNotes     String?
+  leadSource     String    @default("website")
+  customerId     String?
+  customer       Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([status])
+}
+
+/// Generic contact form submission.
+model ContactMessage {
+  id         String    @id @default(cuid())
+  name       String
+  email      String
+  phone      String?
+  subject    String?
+  message    String
+  status     String    @default("NEW") // NEW | READ | REPLIED | ARCHIVED
+  leadSource String    @default("website")
+  customerId String?
+  customer   Customer? @relation(fields: [customerId], references: [id], onDelete: SetNull)
+
+  createdAt DateTime @default(now())
+
+  @@index([status])
+}
+
+/// Consolidated customer record, so the admin can see one person's full history.
+/// Public form submissions upsert by email.
+model Customer {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String?
+  notes     String?
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  inspections Inspection[]
+  sourcing    SourcingRequest[]
+  messages    ContactMessage[]
+
+  @@index([email])
+}
+
+/// Buyer review shown on the homepage.
+model Testimonial {
+  id        String   @id @default(cuid())
+  name      String
+  location  String
+  rating    Int      @default(5)
+  message   String
+  vehicle   String?
+  published Boolean  @default(true)
+  createdAt DateTime @default(now())
+}
+
+/// Search terms typed into inventory search. Powers "most searched brands".
+model SearchLog {
+  id        String   @id @default(cuid())
+  term      String
+  resultCount Int    @default(0)
+  createdAt DateTime @default(now())
+
+  @@index([term])
+  @@index([createdAt])
+}
